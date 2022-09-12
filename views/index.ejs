@@ -11,15 +11,19 @@
 
 <body>
     <link rel="stylesheet" href="/css/index.css">
-    <form action="/pizzas/busca" method="get"> <input type="text" name="q" placeholder="Qual pizza você procura?"
-            autocomplete="off" value=""> <button type="submit">Buscar</button> </form>
+    <form id="search-form" action="/pizzas/busca" method="get"> <input type="text" name="q"
+            placeholder="Qual pizza você procura?" autocomplete="off" value=""> <button type="submit">Buscar</button>
+    </form>
 
     <main>
         <% for(let p of pizzas) { %>
             <article>
                 <img src=<%=p.img %> alt="<%= p.nome %>">
                     <a href="/pizzas/<%= p.id %>">Ver Mais</a>
-                    <button>+ Add</button>
+                    <form action="/pizzas/addcart" method="post">
+                        <input type="hidden" value="<%= p.id %>" name="id">
+                        <button type="submit">+ Add</button>
+                    </form>
                     <div>
                         <%= p.nome %>
                     </div>
